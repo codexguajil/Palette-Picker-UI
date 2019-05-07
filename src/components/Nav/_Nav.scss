@@ -1,0 +1,33 @@
+.Nav {
+  width: 100%; height: 50px;
+
+  position: absolute;
+  top: 50px;
+
+  display: flex;
+  justify-content: center;
+
+  .tutorial {
+    width: 400px; height: 50px;
+    border: solid black 2px;
+    border-radius: 0 0 20px 20px;
+    background: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p { margin: 0; }
+  }
+
+  .toolbar {
+    width: 100px; height: 50px;
+    border: solid black 2px;
+    border-radius: 0 0 20px 20px;
+    background: white;
+
+    position: absolute;
+    right: 0;
+  }
+
+}
