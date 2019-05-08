@@ -38,7 +38,9 @@ cd into directory and ```$ npm install```
 launch in your terminal: ```$ npm start ```
 
 ## Future Development and Extensions Notes
+
 Some functionality that we'd like to have in future iterations:
+
 - 
 - 
 - 
@@ -65,4 +67,4 @@ This project was assigned by David Whitaker and Will Mitchell
 *@ Turing School of Software and Design, Denver, CO.*
 
 ---
-**[Back to top](https://github.com/JakeAdmire/JA--RottenPotatoes/blob/master/README.md#palettepicker)**
+**[Back to top](https://github.com/JakeAdmire/JA--RottenPotatoes/blob/master/README.md#palette-picker)**
