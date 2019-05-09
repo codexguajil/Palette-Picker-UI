@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Color } from '../Color/Color';
+import { fetchProjects } from '../../utils/api';
 
 export class Palette extends Component {
   constructor() {
@@ -7,9 +8,11 @@ export class Palette extends Component {
     this.state = { colors: [] };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.regeneratePalette();
     document.addEventListener('keydown', this.handleKeydown);
+    let projects = await fetchProjects()
+    console.log(projects)
   }
 
   handleKeydown = (event) => {
