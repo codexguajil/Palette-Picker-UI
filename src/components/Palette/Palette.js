@@ -8,14 +8,20 @@ export class Palette extends Component {
   }
 
   componentDidMount = () => {
-    let initialColors = [];
+    this.regeneratePalette();
+    document.addEventListener('keydown', this.handleKeydown);
+  }
 
+  handleKeydown = (event) => {
+    if (event.keyCode === 32) this.regeneratePalette();
+  }
+
+  regeneratePalette = (colors = []) => {
     for (let i = 0; i < 5; i++) {
       let randColor = this.generateColor();
-      initialColors.push(randColor);
+      colors.push(randColor);
     }
-
-    this.setState({ colors: initialColors });
+    this.setState({ colors });
   }
 
   generateColor() {
@@ -25,11 +31,16 @@ export class Palette extends Component {
   render() {
     const { colors } = this.state;
 
+    let paletteClass = this.props.active ? 'active' : '';
+
     return colors 
-      ? <div className="Palette">
+      ? <div className={`Palette ${paletteClass}`}>
+        <div className="colors">
         {
-          colors.map(color => <Color hex={color}/>) 
+          colors.map(color => <Color key={color} hex={color}/>) 
         }
+        </div>
+        <div className={`sidebar`}>sidebar</div>
       </div>
       : <p>LOADING..</p>
   }
