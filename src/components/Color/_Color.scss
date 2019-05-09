@@ -10,16 +10,23 @@
 
   .hex,
   .name {
+    width: 100%;
+    margin: 2px 0;
+
     color: #1f2d3d;
     opacity: .4;
+
     font-weight: 800;
     font-size: 40px;
-    margin: 2px 0;
+    text-align: center;
   }
 
   .name {
-    font-weight: 800;
-    font-size: 16px;
+    font-size: 1.2vw;
+  }
+
+  .hex {
+    font-size: 3vw;
   }
 
   .light {

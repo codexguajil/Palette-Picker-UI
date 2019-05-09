@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import namer from 'color-namer';
 
 export class Color extends Component {
+  constructor() {
+    super();
+    this.state = { checked: false };
+  }
 
   determineLightness(hex) {
     const color = hex.substring(1);
@@ -21,6 +25,12 @@ export class Color extends Component {
     return names.ntc[0].name;
   }
 
+  toggleCheck = () => {
+    console.log('click');
+    let checkedValue = this.state.checked;
+    this.setState({ checked: !checkedValue });
+  }
+
   render() {
     const { hex } = this.props;
     const style = { backgroundColor: hex };
@@ -30,9 +40,10 @@ export class Color extends Component {
     let colorName = this.hexToName(hex).toUpperCase();
 
     return (
-      <div style={style} className="Color">
-        <p className={`hex ${lightClass}`}>{ hex }</p>
-        <p className={`name ${lightClass}`}>{ colorName }</p>
+      <div style={ style } className="Color">
+        <input onChange={this.toggleCheck} type="checkbox" checked={ this.state.checked } />
+        <p className={ `hex ${lightClass}` }>{ hex }</p>
+        <p className={ `name ${lightClass}` }>{ colorName }</p>
       </div>
     )
   }
