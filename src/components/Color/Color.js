@@ -25,23 +25,19 @@ export class Color extends Component {
     return names.ntc[0].name;
   }
 
-  toggleCheck = () => {
-    console.log('click');
-    let checkedValue = this.state.checked;
-    this.setState({ checked: !checkedValue });
-  }
-
   render() {
-    const { hex } = this.props;
+    const { hex, locked, toggleLocked } = this.props;
     const style = { backgroundColor: hex };
 
     let lightClass = this.determineLightness(hex) ? 'light' : '';
 
     let colorName = this.hexToName(hex).toUpperCase();
 
+    let lockClass = locked ? 'locked' : '';
+
     return (
       <div style={ style } className="Color">
-        <input onChange={this.toggleCheck} type="checkbox" checked={ this.state.checked } />
+        <span onMouseDown={() => toggleLocked(hex)} className={`lock ${lockClass} ${lightClass}`} ></span>
         <p className={ `hex ${lightClass}` }>{ hex }</p>
         <p className={ `name ${lightClass}` }>{ colorName }</p>
       </div>
