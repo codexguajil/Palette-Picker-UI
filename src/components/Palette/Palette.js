@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Color } from '../Color/Color';
-import { fetchProjects } from '../../utils/api';
+import { fetchApiData } from '../../utils/api';
 
 export class Palette extends Component {
   constructor() {
