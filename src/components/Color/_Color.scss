@@ -8,13 +8,29 @@
   align-items: center;
   justify-content: flex-end;
 
+  transition: all .3s ease-out;
+
+  &:hover {
+    box-shadow: #0000003d 0px 0px 0px 10px inset;
+    cursor: pointer;
+
+  .hex, .name, .lock { opacity: .4; }
+
+  }
+
+  &:active {
+    .lock { opacity: .3; }
+  }
+
+  .hex, .name, .lock { transition: all .2s ease; }
+
   .hex,
   .name {
     width: 100%;
     margin: 2px 0;
 
     color: #1f2d3d;
-    opacity: .4;
+    opacity: .3;
 
     font-weight: 800;
     font-size: 40px;
@@ -39,7 +55,7 @@
 
   .lock.light { border-color: #fff; }
 
-  .locked { background: #1f2d3d; }
+  .lock.locked { background: #1f2d3d; }
 
   .locked.light { background: #fff; }
 

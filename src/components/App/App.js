@@ -6,18 +6,19 @@ import { Palette } from '../Palette/Palette';
 export class App extends Component {
   constructor() {
     super();
-    this.state = { activeSidebar: false };
+    this.state = { activeNav: false };
   }
 
-  changeState = (state) => {
-    this.setState(state);
+  toggleNav = (e) => {
+    this.setState({ activeNav: e.target.checked });
   }
 
   render() {
     return (
       <div className="App">
-        <Header changeState={this.changeState} />
-        <Palette active={this.state.activeSidebar} />
+        <Header toggleNav={this.toggleNav} activeNav={this.state.activeNav}/>
+        <Nav activeNav={this.state.activeNav}/>
+        <Palette />
       </div>
     );
   }

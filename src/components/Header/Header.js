@@ -1,12 +1,15 @@
 import React from 'react';
-import { Nav } from '../Nav/Nav';
+import arrow from '../../media/arrow.svg';
 
 export function Header(props) {
+
+  let labelStyle = {backgroundImage: `url(${arrow})`}
 
   return (
     <div className="Header">
       <h1>PalettePicker</h1>
-      <Nav changeState={props.changeState}/>
+      <label style={labelStyle} for="toggle" className={`label ${props.activeNav ? 'flipped' : ''}`} ></label>
+      <input id="toggle" onChange={props.toggleNav} type="checkbox" />
     </div>
   )
 }

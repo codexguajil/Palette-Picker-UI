@@ -6,8 +6,6 @@
   
   display: flex;
 
-  overflow: hidden;
-
   transition: all .2s ease;
 
   .colors {
@@ -17,17 +15,4 @@
     display: flex;
   }
 
-  .sidebar {
-    background: grey;
-    width: 240px; height: 100%;
-
-    position: absolute;
-    right: -240px;
-
-    transition: all .2s ease;
-  }
-}
-
-.active {
-  padding-right: 240px;
 }
