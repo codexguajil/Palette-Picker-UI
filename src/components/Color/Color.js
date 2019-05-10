@@ -36,8 +36,8 @@ export class Color extends Component {
     let lockClass = locked ? 'locked' : '';
 
     return (
-      <div style={ style } className="Color">
-        <span onMouseDown={() => toggleLocked(hex)} className={`lock ${lockClass} ${lightClass}`} ></span>
+      <div onMouseDown={() => toggleLocked(hex)} style={ style } className="Color">
+        <span className={`lock ${lockClass} ${lightClass}`} ></span>
         <p className={ `hex ${lightClass}` }>{ hex }</p>
         <p className={ `name ${lightClass}` }>{ colorName }</p>
       </div>
