@@ -8,6 +8,13 @@
   align-items: center;
   justify-content: flex-end;
 
+  transition: all .3s ease-out;
+
+  &:hover {
+    box-shadow: #0000003d 0px 0px 0px 10px inset;
+    cursor: pointer;
+  }
+
   .hex,
   .name {
     width: 100%;
