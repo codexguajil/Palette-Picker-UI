@@ -28,16 +28,26 @@
     text-align: center;
   }
 
-  .name {
-    font-size: 1.2vw;
+  .hex.light, .name.light { color: #fff; } 
+
+  .name { font-size: 1.2vw; }
+
+  .hex { font-size: 3vw; }
+
+  .lock {
+    box-sizing: border-box;
+    width: 50px; height: 50px;
+
+    border: solid #1f2d3d 6px;
+    opacity: .4;
+
+    &:active { opacity: .1; }
   }
 
-  .hex {
-    font-size: 3vw;
-  }
+  .lock.light { border-color: #fff; }
 
-  .light {
-    color: #fff;
-  }
+  .locked { background: #1f2d3d; }
+
+  .locked.light { background: #fff; }
 
 }
