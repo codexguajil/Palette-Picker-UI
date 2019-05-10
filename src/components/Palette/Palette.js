@@ -48,16 +48,13 @@ export class Palette extends Component {
   render() {
     const { colors } = this.state;
 
-    let paletteClass = this.props.active ? 'active' : '';
-
     return colors 
-      ? <div className={`Palette ${paletteClass}`}>
+      ? <div className={`Palette`}>
         <div className="colors">
         {
           colors.map(color => <Color key={color.hex} toggleLocked={this.toggleLocked} {...color}/>) 
         }
         </div>
-        <div className={`sidebar`}>sidebar</div>
       </div>
       : <p>LOADING..</p>
   }
