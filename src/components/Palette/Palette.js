@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
 import { Color } from '../Color/Color';
+import { fetchApiData } from '../../utils/api';
 
 export class Palette extends Component {
   constructor() {
     super();
-    this.state = { colors: [] };
+    this.state = { 
+      colors: [],
+      savedProjects: [],
+      savedPalettes: [],
+    };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.regeneratePalette();
     document.addEventListener('keydown', this.handleKeydown);
+    this.fetchProjects()
+    this.fetchPalettes()
+  }
+
+  fetchProjects = async () => {
+    let projects = await fetchApiData('projects')
+    this.setState({
+      savedProjects: projects[0]
+    })
+  }
+
+  fetchPalettes = async () => {
+    let palettes = await fetchApiData('palettes')
+    this.setState({
+      savedPalettes: palettes[0]
+    })
   }
 
   handleKeydown = (event) => {
@@ -57,7 +78,7 @@ export class Palette extends Component {
           colors.map(color => <Color key={color.hex} toggleLocked={this.toggleLocked} {...color}/>) 
         }
         </div>
-        <div className={`sidebar`}>sidebar</div>
+        <div className={`sidebar`}>sidebar{this.state.savedProjects.name}</div>
       </div>
       : <p>LOADING..</p>
   }
