@@ -1,36 +1,15 @@
 import React, { Component } from 'react';
 import { Color } from '../Color/Color';
-import { fetchApiData } from '../../utils/api';
 
 export class Palette extends Component {
   constructor() {
     super();
-    this.state = { 
-      colors: [],
-      savedProjects: [],
-      savedPalettes: [],
-    };
+    this.state = {  colors: [] };
   }
 
   componentDidMount = async () => {
-    this.regeneratePalette();
+    // this.regeneratePalette();
     document.addEventListener('keydown', this.handleKeydown);
-    this.fetchProjects()
-    this.fetchPalettes()
-  }
-
-  fetchProjects = async () => {
-    let projects = await fetchApiData('projects')
-    this.setState({
-      savedProjects: projects[0]
-    })
-  }
-
-  fetchPalettes = async () => {
-    let palettes = await fetchApiData('palettes')
-    this.setState({
-      savedPalettes: palettes[0]
-    })
   }
 
   handleKeydown = (event) => {
@@ -60,7 +39,7 @@ export class Palette extends Component {
   toggleLocked = (hex) => {
     let storedPalette = this.state.colors;
 
-    const foundColor = storedPalette.find(color => color.hex === hex)
+    let foundColor = storedPalette.find(color => color.hex === hex)
     foundColor.locked = !foundColor.locked;
 
     this.setState({ colors: storedPalette });
@@ -77,6 +56,6 @@ export class Palette extends Component {
         }
         </div>
       </div>
-      : <p>LOADING..</p>
+      : <p>PRESS SPACE TO GENERATE A NEW COLOR PALETTE!</p>
   }
 }
