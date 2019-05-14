@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Color } from '../Color/Color';
+import { Color } from '../../components/Color/Color';
+import { currentColors } from '../../actions';
+import { connect } from 'react-redux';
+
 
 export class Palette extends Component {
   constructor() {
@@ -8,7 +11,7 @@ export class Palette extends Component {
   }
 
   componentDidMount = async () => {
-    // this.regeneratePalette();
+    this.regeneratePalette();
     document.addEventListener('keydown', this.handleKeydown);
   }
 
@@ -30,6 +33,7 @@ export class Palette extends Component {
 
     }
     this.setState({ colors: initialColors });
+    this.props.currentColors(initialColors)
   }
 
   generateColor() {
@@ -59,3 +63,9 @@ export class Palette extends Component {
       : <p>PRESS SPACE TO GENERATE A NEW COLOR PALETTE!</p>
   }
 }
+
+export const mapDispatchToProps = (dispatch) => ({
+  currentColors: (colors) => dispatch(currentColors(colors))
+})
+
+export default connect(null, mapDispatchToProps)(Palette)

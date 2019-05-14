@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Header } from '../Header/Header';
-import { Nav } from '../Nav/Nav';
-import { Palette } from '../Palette/Palette';
+import Header from '../Header/Header';
+import Nav from '../../containers/Nav/Nav';
+import Palette from '../../containers/Palette/Palette';
 
 export class App extends Component {
   constructor() {
