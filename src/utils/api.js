@@ -7,4 +7,5 @@ export const fetchApiData = async (endpoint, options) => {
   } else {
     throw Error(response.statusText);
   }
+  
 }

@@ -3,6 +3,7 @@ import { Color } from '../../components/Color/Color';
 import { currentColors } from '../../actions';
 import { connect } from 'react-redux';
 
+
 export class Palette extends Component {
   constructor() {
     super();
