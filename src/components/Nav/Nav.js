@@ -7,21 +7,21 @@ export class Nav extends Component {
     return `Nav ${boolean ? 'active' : ''}`
   }
 
-  // fetchProjects = async () => {
+  // fetchSomething = async (table) => {
   //   try {
-  //     const response = fetchApiData('projects');
-  //     console.log(response);
+  //     const response = await fetchApiData(table);
   //   } catch (error) {
-  //     return error;
+  //     return error
   //   }
   // }
 
   render() {
+    // let projects = this.fetchSomething('projects');
     let navClass = this.navClassBuilder(this.props.activeNav);
     return (
       <div className={navClass}>
         <div className="info-section projects">
-          
+          <p></p>
         </div>
         <div className="info-section palettes">
           

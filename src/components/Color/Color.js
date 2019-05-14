@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
+
 import namer from 'color-namer';
+import convert from 'color-convert';
 
 export class Color extends Component {
 
   determineLightLevel(hex) {
-    const color = hex.substring(1);
-    const rgbColor = parseInt(color, 16);
+    const baseHex = hex.slice(1, 7);
 
-    const red = (rgbColor >> 16) & 0xff;
-    const green = (rgbColor >> 8) & 0xff;
-    const blue = (rgbColor >> 0) & 0xff;
+    let hsl = convert.hex.hsl(baseHex);
 
-    const lightLevel = 0.2126 * red + 0.7152 * green + 0.0722 * blue; 
+    let lightLvl = hsl[2];
 
-    return lightLevel < 80 ? true : false;
+    return lightLvl <= 40 ? true : false;
   }
 
   hexToName(hex) {
