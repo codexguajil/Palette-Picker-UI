@@ -8,7 +8,7 @@ export function Header(props) {
   return (
     <div className="Header">
       <h1>PalettePicker</h1>
-      <label style={labelStyle} for="toggle" className={`label ${props.activeNav ? 'flipped' : ''}`} ></label>
+      <label style={labelStyle}  className={`label ${props.activeNav ? 'flipped' : ''}`} ></label>
       <input id="toggle" onChange={props.toggleNav} type="checkbox" />
     </div>
   )
