@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import namer from 'color-namer';
 
 export class Color extends Component {
-  constructor() {
-    super();
-    this.state = { checked: false };
-  }
 
-  determineLightness(hex) {
+  determineLightLevel(hex) {
     const color = hex.substring(1);
     const rgbColor = parseInt(color, 16);
 
@@ -17,7 +13,7 @@ export class Color extends Component {
 
     const lightLevel = 0.2126 * red + 0.7152 * green + 0.0722 * blue; 
 
-    if (lightLevel < 80) return true;
+    return lightLevel < 80 ? true : false;
   }
 
   hexToName(hex) {
@@ -29,7 +25,7 @@ export class Color extends Component {
     const { hex, locked, toggleLocked } = this.props;
     const style = { backgroundColor: hex };
 
-    let lightClass = this.determineLightness(hex) ? 'light' : '';
+    let lightClass = this.determineLightLevel(hex) ? 'light' : '';
 
     let colorName = this.hexToName(hex).toUpperCase();
 
