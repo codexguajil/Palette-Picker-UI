@@ -3,22 +3,19 @@ import { Color } from '../Color/Color';
 import convert from 'color-convert';
 
 export class Palette extends Component {
-  constructor() {
-    super();
-    this.state = {  colors: [] };
-  }
 
   componentDidMount = async () => {
-    // this.generatePalette();
     document.addEventListener('keydown', this.handleKeydown);
   }
 
   handleKeydown = (event) => {
-    if (event.keyCode === 32) this.generatePalette();
+    if (event.keyCode === 32) {
+      if (event.path[0].id !== 'projectTitle' && event.path[0].id !== 'paletteTitle') this.generatePalette();
+    }
   }
 
   generatePalette = () => {
-    const { colors } = this.state;
+    const { colors } = this.props;
     let colorPalette = [];
 
     let lockedState = colors.filter(color => color.locked);
@@ -52,7 +49,7 @@ export class Palette extends Component {
         colorPalette.push({ hex: '#' + convert.hsl.hex(newHSL), locked: false });
       }
     }
-    this.setState({ colors: colorPalette });
+    this.props.setHex(colorPalette);
   }
 
   generateBaseColor() {
@@ -85,16 +82,16 @@ export class Palette extends Component {
   }
 
   toggleLocked = (hex) => {
-    let storedPalette = this.state.colors;
+    let storedPalette = this.props.colors;
 
     let foundColor = storedPalette.find(color => color.hex === hex)
     foundColor.locked = !foundColor.locked;
 
-    this.setState({ colors: storedPalette });
+    this.props.setHex(storedPalette);
   }
 
   render() {
-    const { colors } = this.state;
+    const { colors } = this.props;
     
     if (!colors.length) this.generatePalette();
 
