@@ -22,8 +22,9 @@ describe('Color', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it.skip('should invoke toggleLocked prop on click', () => {    
-    wrapper.find('.Color').simulate('click');
+  it('should invoke toggleLocked prop on click', () => {    
+    wrapper.find('.Color').simulate('mouseDown');
+
     expect(mockToggleLocked).toHaveBeenCalledWith(mockHex);
   })
 
