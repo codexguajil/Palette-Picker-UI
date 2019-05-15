@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { fetchApiData, postApiData, deleteApiData } from '../../utils/api';
+import { fetchApiData } from '../../utils/api';
 
 export class Nav extends Component {
   constructor() {
     super();
     this.state = { 
       projects: [],
-      // palettes: [],
       projectTitle: '',
       paletteTitle: '',
       projectError: '',
@@ -16,7 +15,6 @@ export class Nav extends Component {
 
   componentDidMount() {
     this.gatherProjects();
-    // this.gatherPalettes();
   }
 
   navClassBuilder(boolean) {
@@ -25,26 +23,26 @@ export class Nav extends Component {
 
   gatherProjects = async () => {
     try {
-      const response = await fetchApiData('projects');
+      const projectResponse = await fetchApiData('projects', { method: 'GET' });
 
+      const paletteResponse = await fetchApiData('palettes', { method: 'GET' });
+
+      let projects = projectResponse.map(project => { 
+        let projectObj = { title: project.title, id: project.id, palettes: [] }
+
+        paletteResponse.forEach(palette => {
+          if (palette.project_id === project.id) {
+            projectObj.palettes.push(palette);
+          }
+        });
+        return projectObj;
+      });
       this.setState({ 
-        projects: response,
+        projects,
         projectTitle: '',
+        paletteTitle: ''
       });  
   
-    } catch (error) {
-      return error;
-    }
-  }
-
-  gatherPalettes = async (id) => {
-    try {
-      const response = await fetchApiData('palettes');
-
-      this.setState({ 
-        palettes: response,
-        paletteTitle: '' 
-      }); 
     } catch (error) {
       return error;
     }
@@ -63,11 +61,16 @@ export class Nav extends Component {
     const { colors } = this.props;
     switch (id) {
       case 'projects' :
-        await postApiData(id, { title: projectTitle });
+        let projectOptions = { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: projectTitle })
+        }
+        await fetchApiData(id, projectOptions);
         this.gatherProjects();
         return id;
       case 'palettes' :
-        let projects = await fetchApiData('projects');
+        let projects = await fetchApiData('projects', { method: 'GET' });
         let options = Array.from(e.target.querySelectorAll('option'));
         let project_id = options.find(option => option.selected).id;
         let body = { 
@@ -79,8 +82,13 @@ export class Nav extends Component {
           color5: colors[4].hex,
           project_id
         };
-        await postApiData(id, body);
-        this.gatherPalettes();
+        let paletteOptions = { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }
+        await fetchApiData(id, paletteOptions);
+        this.gatherProjects();
         return id;
       default :
         return id;
@@ -89,8 +97,28 @@ export class Nav extends Component {
 
   handleDelete = async (e) => {
     const { id, value } = e.target;
-    let response = await deleteApiData(`${value}/${id}`);
-    if (response === 'No Content') this.gatherProjects();
+    let response = await fetchApiData(`${value}/${id}`, { method: 'DELETE' });
+    if (response.statusText === 'No Content') this.gatherProjects();
+  }
+
+  handlePatch = async (e) => {
+    const { colors } = this.props;
+    const { id, value } = e.target;
+    let name = e.target.parentElement.querySelector('p').innerText;
+    let options = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        name, 
+        color1: colors[0].hex, 
+        color2: colors[1].hex, 
+        color3: colors[2].hex, 
+        color4: colors[3].hex, 
+        color5: colors[4].hex
+      })
+    }
+    let response = await fetchApiData(`${value}/${id}`, options);
+    console.log(response); // make popup message
   }
 
   render() {
@@ -151,9 +179,21 @@ export class Nav extends Component {
                   <div>
                     <p>Palettes:</p>
                     {
-                      // palettes.length
-                      //   && palettes.filter(palette => palette.project_id === project.id);
-                    }
+                      project.palettes.length
+                        ? project.palettes.map(palette => 
+                          <div key={palette.id}>
+                            <p id="paletteEdit" contentEditable="true" onClick={() => this.props.setHex([
+                              {hex: palette.color1}, 
+                              {hex: palette.color2}, 
+                              {hex: palette.color3}, 
+                              {hex: palette.color4}, 
+                              {hex: palette.color5}
+                              ])}>{palette.name}</p>
+                            <button value="palettes" id={palette.id} onClick={this.handlePatch}>SAVE</button>
+                            <button value="palettes" id={palette.id} onClick={this.handleDelete}>X</button>
+                          </div>)
+                        : <p>Add a palette!</p>
+                    } 
                   </div>
                 </div>
                 )
