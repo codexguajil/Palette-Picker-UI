@@ -10,7 +10,7 @@ export class Palette extends Component {
 
   handleKeydown = (event) => {
     if (event.keyCode === 32) {
-      if (event.path[0].id !== 'projectTitle' && event.path[0].id !== 'paletteTitle') this.generatePalette();
+      if (event.path[0].id !== 'projectTitle' && event.path[0].id !== 'paletteTitle' && event.path[0].id !== 'paletteEdit') this.generatePalette();
     }
   }
 
