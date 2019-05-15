@@ -24,7 +24,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Header toggleNav={this.toggleNav} activeNav={this.state.activeNav}/>
-        <Nav colors={this.state.currHex} activeNav={this.state.activeNav}/>
+        <Nav colors={this.state.currHex} setHex={this.setHex} activeNav={this.state.activeNav}/>
         <Palette colors={this.state.currHex} setHex={this.setHex}/>
       </div>
     );
