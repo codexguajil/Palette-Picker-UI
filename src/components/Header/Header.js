@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import arrow from '../../media/arrow.svg';
 
-export default class Header extends Component {
+export class Header extends Component {
 
   labelClassBuilder(boolean) {
     return `label ${boolean ? 'flipped' : ''}`;
