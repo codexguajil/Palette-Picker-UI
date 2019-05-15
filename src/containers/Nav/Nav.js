@@ -16,11 +16,41 @@ export class Nav extends Component {
     return `Nav ${boolean ? 'active' : ''}`
   }
 
-  savePalettes = async () => {
+  saveProject = async () => {
+    let currProject = this.props.project.find(project => project.name === this.state.project)
     let optionsObject = {
       method: 'POST',
+      body: JSON.stringify({title: currProject.name}),
       headers: {
-        "Content_Type" : "application/json"
+        'Content-Type' : 'application/json'
+      },
+    }
+    try {
+      const response = await fetchApiData('projects', optionsObject);
+      console.log(response);
+      this.savePalettes(currProject)
+    } catch (error) {
+      return error;
+    }
+  }
+
+  savePalettes = async (project) => {
+    console.log(project)
+    let name = this.state.name
+    let palettesObject = {
+      title: project.name,
+      name: name,
+      color1: project.palettes[0].colors[0].hex,
+      color2: project.palettes[0].colors[1].hex,
+      color3: project.palettes[0].colors[2].hex,
+      color4: project.palettes[0].colors[3].hex,
+      color5: project.palettes[0].colors[4].hex
+    }
+    let optionsObject = {
+      method: 'POST',
+      body: JSON.stringify(palettesObject),
+      headers: {
+        'Content-Type': 'application/json'
       }
     }
     try {
@@ -105,8 +135,10 @@ export class Nav extends Component {
           }
           </div>
           </div> 
-        <button className="info-section create-new">
-          and this is the create-new section
+        <button className="info-section create-new"
+                onClick={this.saveProject}
+        >
+          Save
         </button>
         <button className="tutorial">
           <p>Press the ‘spacebar’ key to generate a new palette</p>
