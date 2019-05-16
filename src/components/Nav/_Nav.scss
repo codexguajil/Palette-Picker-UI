@@ -3,6 +3,7 @@
   background: #dbdbdb;
   box-sizing: border-box;
   padding: 10px 0;
+  box-shadow: inset 0px 0px 12px 2px #0b0b0b2b;
 
   position: absolute;
   top: -200px; left: 0; right: 0;
@@ -14,6 +15,13 @@
 
   transition: all .3s ease;
 
+  p { margin: 0 0 0 5px; }
+
+  h6 { 
+    margin: 5px 0;
+    color: #a8a8a8; 
+  }
+
   .line-break {
     width: 2px; height: 100%;
     background: #a8a8a8;
@@ -21,7 +29,7 @@
 
   .tutorial, .toolbar {
     position: absolute;
-    bottom: -50px;
+    bottom: -30px;
   }
 
   .info-section {
@@ -32,10 +40,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+
+    label {
+      color: #555555;
+      font-weight: 600;
+    }
   }
 
   .projects {
     overflow: scroll;
+    align-items: center;
+
     &::-webkit-scrollbar {
         width: 7px; height: 0;
     }
@@ -43,12 +58,19 @@
         border-radius: 5px;
         background-color: #a8a8a8;
     }
+
+    .splash-text {
+      color: #a8a8a8;
+      font-size: 28px;
+      font-weight: 800;
+    }
   }
 
   .tutorial {
-    width: 400px; height: 50px;
+    width: 100%; height: 30px;
     background: white;
     left: 0;
+    box-shadow: 0px 0px 12px 2px #00000042;
 
     display: flex;
     justify-content: center;
@@ -63,35 +85,43 @@
   }
 
   #projects {
-    input { 
-      box-sizing: border-box; 
-      border: none;
-      height: 30px;
-      font-size: 16px;
-
-      &:focus { outline: none; }
-    }
-
     input:first-child { width: 75%; }
     input:last-child {  width: 25%; }
   }
 
+  #projects input,
+  #palettes input,
+  #palettes select {
+    box-sizing: border-box;
+    height: 40px;
+    font-size: 20px;
+    border: solid #555555 2px;
+
+    &:focus { outline: none; }
+  }
+
+  #projects input:nth-child(1),
+  #palettes input:nth-child(2) {
+    border-radius: 5px 0 0 5px;
+    border-width: 2px 0 2px 2px;
+  }
+
+  #projects input:last-child, 
+  #palettes input:last-child {
+    width: 25%; 
+    border-radius: 0 5px 5px 0;
+    border-width: 2px 2px 2px 0;
+    text-transform: uppercase;
+  }
+
   #palettes {
-    input,
     select {
-      box-sizing: border-box;
-      border: none;
-      height: 30px;
-      font-size: 16px;
-
-      &:focus { outline: none; }
+      color: #555555;
+      background: white;
+      margin-right: 2%;
+      width: 23%;
     }
-
-    select,
-    input:last-child { width: 25%; }
-
-    input:nth-child(2) { width: 50%; }
-
+    input:nth-child(2) {  width: 50%; }
   }
 
   #projectTitle,
@@ -106,12 +136,65 @@
   }
 
   .submit-btn {
-    background: #307682; 
+    background: #555555; 
     color: white;
+  }
+
+  .project-container {
+    box-sizing: border-box;
+    position: relative;
+    padding: 10px; margin: 0 0 10px;
+    width: 100%;
+    background: white;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    .project-delete {
+      width: 30px; height: 30px;
+      position: absolute;
+      right: 10px; top: 10px;
+
+      background: #a8a8a8;
+      border-radius: 50px;
+
+      color: white;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .palette-container {
+      display: flex;
+      justify-content: space-between;
+
+      padding: 5px; margin: 0 0 5px;
+      box-sizing: border-box;
+      background: #d3d3d3;
+      border-radius: 10px;
+      color: white;
+
+      .palette-save,
+      .palette-delete {
+        width: 25px;
+        background: #a8a8a8;
+        margin: 0 5px 0 0;
+
+        border: 0;
+        border-radius: 5px;
+
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+      }
+
+      .palette-save { width: 50px; }
+
+      .palette-delete { margin: 0; }
+    }
+
   }
 
 }
 
-.Nav.active {
-  top: 50px;
-}
+.Nav.active { top: 50px; }

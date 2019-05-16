@@ -150,7 +150,7 @@ export class Nav extends Component {
                 { 
                   projects.length 
                     ? projects.map(project => <option id={project.id} key={project.id}>{project.title}</option>)
-                    : <option>Create a Project!</option>
+                    : <option></option>
                 }
               </select>
               <input  onChange={this.handleChange} 
@@ -170,18 +170,18 @@ export class Nav extends Component {
           {
             projects.length
               ? projects.map(project => (
-                <div key={project.id}>
+                <div className="project-container" key={project.id}>
+
+                  <h6>TITLE:</h6>
+                  <p key={project.id}>{project.title}</p>
+                  <button className="project-delete" value="projects" id={project.id} onClick={this.handleDelete}>X</button>
+
                   <div>
-                    <h3>Project Title:</h3>
-                    <p key={project.id}>{project.title}</p>
-                    <button value="projects" id={project.id} onClick={this.handleDelete}>X</button>
-                  </div>
-                  <div>
-                    <p>Palettes:</p>
+                    <h6>PALETTES:</h6>
                     {
                       project.palettes.length
                         ? project.palettes.map(palette => 
-                          <div key={palette.id}>
+                          <div key={palette.id} className="palette-container">
                             <p id="paletteEdit" contentEditable="true" onClick={() => this.props.setHex([
                               {hex: palette.color1}, 
                               {hex: palette.color2}, 
@@ -189,8 +189,10 @@ export class Nav extends Component {
                               {hex: palette.color4}, 
                               {hex: palette.color5}
                               ])}>{palette.name}</p>
-                            <button value="palettes" id={palette.id} onClick={this.handlePatch}>SAVE</button>
-                            <button value="palettes" id={palette.id} onClick={this.handleDelete}>X</button>
+                            <div className="palette-buttons">
+                              <button className="palette-save" value="palettes" id={palette.id} onClick={this.handlePatch}>SAVE</button>
+                              <button className="palette-delete" value="palettes" id={palette.id} onClick={this.handleDelete}>X</button>
+                            </div>
                           </div>)
                         : <p>Add a palette!</p>
                     } 
@@ -198,7 +200,7 @@ export class Nav extends Component {
                 </div>
                 )
               )
-              : <p>Create a Project!</p>
+              : <p className="splash-text">◄ Try Creating a Project!</p>
           }
           
         </div>
