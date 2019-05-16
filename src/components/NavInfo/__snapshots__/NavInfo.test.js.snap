@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavInfo mapPaletteInfo() should return JSX 1`] = `
+Array [
+  <div
+    className="palette-container"
+  >
+    <p
+      id="paletteEdit"
+      onClick={[Function]}
+    >
+      Test Palette
+    </p>
+    <div
+      className="palette-buttons"
+    >
+      <button
+        className="palette-save"
+        id={63}
+        onClick={[MockFunction]}
+        value="palettes"
+      >
+        SAVE
+      </button>
+      <button
+        className="palette-delete"
+        id={63}
+        onClick={[MockFunction]}
+        value="palettes"
+      >
+        X
+      </button>
+    </div>
+  </div>,
+]
+`;
+
+exports[`NavInfo mapProjectInfo() should return JSX 1`] = `
+Array [
+  <div
+    className="project-container"
+  >
+    <h6>
+      TITLE:
+    </h6>
+    <p>
+      Test Project
+    </p>
+    <button
+      className="project-delete"
+      id={73}
+      onClick={[MockFunction]}
+      value="projects"
+    >
+      X
+    </button>
+    <div>
+      <h6>
+        PALETTES:
+      </h6>
+      <div
+        className="palette-container"
+      >
+        <p
+          id="paletteEdit"
+          onClick={[Function]}
+        >
+          Test Palette
+        </p>
+        <div
+          className="palette-buttons"
+        >
+          <button
+            className="palette-save"
+            id={63}
+            onClick={[MockFunction]}
+            value="palettes"
+          >
+            SAVE
+          </button>
+          <button
+            className="palette-delete"
+            id={63}
+            onClick={[MockFunction]}
+            value="palettes"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`NavInfo should match the snapshot 1`] = `ShallowWrapper {}`;
