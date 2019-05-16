@@ -6,10 +6,25 @@ import { shallow } from 'enzyme';
 describe('Palette', () => {
 
   let wrapper;
+  let mockColors = [
+    { hex: "#6484C4", locked: false },
+    { hex: "#458EA1", locked: false },
+    { hex: "#3E7A72", locked: false },
+    { hex: "#2F5040", locked: false },
+    { hex: "#2B362D", locked: false }
+  ]
+  let mockEvent = { 
+    keyCode: 32, 
+    path: [
+      { id: 'palette' }
+    ]
+  };
+  let setHexMock = jest.fn();
 
   beforeEach(() => {
     wrapper = shallow(
-      <Palette />
+      <Palette  colors={mockColors}
+                setHex={setHexMock}/>
     )
   })
 
@@ -17,24 +32,18 @@ describe('Palette', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('should have default state', () => {
-    let mockState = { colors: [] };
-    expect(wrapper.state()).toEqual(mockState);
-  })
-
   describe('handleKeydown(event)', () => {
 
     it.skip('should be invoked on any key press', () => {
       const mockSpy = jest.spyOn(wrapper.instance(), 'handleKeydown');
-      const keyCode = { keyCode: 13 };
 
-      wrapper.simulate('keyown', keyCode);
+      wrapper.simulate('keydown', mockEvent);
 
-      expect(mockSpy).toHaveBeenCalledWith(keyCode);
+      expect(mockSpy).toHaveBeenCalledWith(mockEvent);
     })
 
     it('should invoke generatePalette on space key press', () => {
-      const mockEvent = { keyCode: 32 };
+      // const mockEvent = { keyCode: 32 };
       const mockSpy = jest.spyOn(wrapper.instance(), 'generatePalette');
 
       wrapper.instance().handleKeydown(mockEvent);
@@ -46,16 +55,7 @@ describe('Palette', () => {
 
   describe('generatePalette()', () => {
 
-    it('should update state', () => {
-      expect(wrapper.state('colors').length).toEqual(0)
-
-      wrapper.instance().generatePalette();
-
-      expect(wrapper.state('colors').length).toEqual(5)
-    })
-
     it('should invoke generateBaseColor', () => {
-      expect(wrapper.state('colors')).toEqual([]);
       const mockSpy = jest.spyOn(wrapper.instance(), 'generateBaseColor');
 
       wrapper.instance().generatePalette();
@@ -111,15 +111,6 @@ describe('Palette', () => {
   })
 
   describe('toggleLocked(hex)', () => {
-
-    it('should update state', () => {
-      wrapper.instance().generatePalette();
-      const initialState = wrapper.state('colors');
-
-      wrapper.instance().toggleLocked(initialState[1].hex);
-
-      expect(wrapper.state('colors')).toEqual(initialState);
-    })
 
   })
 

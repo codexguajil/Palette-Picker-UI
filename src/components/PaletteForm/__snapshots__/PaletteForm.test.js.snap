@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaletteForm mapProjectOptions() should return JSX 1`] = `
+Array [
+  <option
+    id={73}
+  >
+    Test Project
+  </option>,
+]
+`;
+
+exports[`PaletteForm should match snapshot 1`] = `ShallowWrapper {}`;

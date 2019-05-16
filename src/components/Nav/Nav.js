@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { fetchApiData } from '../../utils/api';
+import { ProjectForm } from '../ProjectForm/ProjectForm';
+import { PaletteForm } from '../PaletteForm/PaletteForm';
+import { NavInfo } from '../NavInfo/NavInfo';
 
 export class Nav extends Component {
   constructor() {
@@ -60,6 +63,7 @@ export class Nav extends Component {
     const { projectTitle, paletteTitle } = this.state;
     const { colors } = this.props;
     switch (id) {
+
       case 'projects' :
         let projectOptions = { 
           method: 'POST',
@@ -69,8 +73,9 @@ export class Nav extends Component {
         await fetchApiData(id, projectOptions);
         this.gatherProjects();
         return id;
+
       case 'palettes' :
-        let projects = await fetchApiData('projects', { method: 'GET' });
+
         let options = Array.from(e.target.querySelectorAll('option'));
         let project_id = options.find(option => option.selected).id;
         let body = { 
@@ -90,6 +95,7 @@ export class Nav extends Component {
         await fetchApiData(id, paletteOptions);
         this.gatherProjects();
         return id;
+        
       default :
         return id;
     }   
@@ -130,78 +136,26 @@ export class Nav extends Component {
       <div className={navClass}>
         <div className="info-section form">
 
-          <form id="projects" onSubmit={this.handleSubmit}>
-            <label htmlFor="projectTitle">Create a Project:</label>
-            <div>
-              <input  onChange={this.handleChange} 
-                      id="projectTitle" 
-                      value={projectTitle} 
-                      type="text" 
-                      placeholder={projectError || "ex. Home Decor.."}>
-              </input>
-              <input className="submit-btn" type="submit"></input>
-            </div>
-          </form>
+          <ProjectForm  handleSubmit={this.handleSubmit}
+                        handleChange={this.handleChange}
+                        projectTitle={projectTitle}
+                        projectError={projectError} />
 
-          <form id="palettes" onSubmit={this.handleSubmit}>
-            <label htmlFor="paletteTitle">Save this Palette:</label>
-            <div>
-              <select>
-                { 
-                  projects.length 
-                    ? projects.map(project => <option id={project.id} key={project.id}>{project.title}</option>)
-                    : <option>Create a Project!</option>
-                }
-              </select>
-              <input  onChange={this.handleChange} 
-                      id="paletteTitle" 
-                      value={paletteTitle} 
-                      type="text" 
-                      placeholder={paletteError || "ex. Autumn Colors.."}>
-              </input>
-              <input className="submit-btn" type="submit"></input>
-            </div>
-          </form>
+          <PaletteForm  handleSubmit={this.handleSubmit}
+                        handleChange={this.handleChange}
+                        paletteTitle={paletteTitle}
+                        paletteError={paletteError}
+                        projects={projects} />
 
         </div>
+
         <div className="line-break"></div>
-        <div className="info-section projects">
 
-          {
-            projects.length
-              ? projects.map(project => (
-                <div key={project.id}>
-                  <div>
-                    <h3>Project Title:</h3>
-                    <p key={project.id}>{project.title}</p>
-                    <button value="projects" id={project.id} onClick={this.handleDelete}>X</button>
-                  </div>
-                  <div>
-                    <p>Palettes:</p>
-                    {
-                      project.palettes.length
-                        ? project.palettes.map(palette => 
-                          <div key={palette.id}>
-                            <p id="paletteEdit" contentEditable="true" onClick={() => this.props.setHex([
-                              {hex: palette.color1}, 
-                              {hex: palette.color2}, 
-                              {hex: palette.color3}, 
-                              {hex: palette.color4}, 
-                              {hex: palette.color5}
-                              ])}>{palette.name}</p>
-                            <button value="palettes" id={palette.id} onClick={this.handlePatch}>SAVE</button>
-                            <button value="palettes" id={palette.id} onClick={this.handleDelete}>X</button>
-                          </div>)
-                        : <p>Add a palette!</p>
-                    } 
-                  </div>
-                </div>
-                )
-              )
-              : <p>Create a Project!</p>
-          }
-          
-        </div>
+        <NavInfo  projects={projects}
+                  handleDelete={this.handleDelete}
+                  handlePatch={this.handlePatch}
+                  setHex={this.props.setHex} />
+
         <div className="tutorial">
           <p>Press the ‘spacebar’ key to generate a new palette</p>
         </div>
