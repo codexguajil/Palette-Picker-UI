@@ -1,5 +1,7 @@
 # Palette Picker
 
+Live on Heroku! https://em-ja-palette-picker.herokuapp.com/
+
 ## Overview:
 
 Palette Picker is a paired project during MOD-4 of Turing School of Software and Design
@@ -17,7 +19,7 @@ Palette Picker is a paired project during MOD-4 of Turing School of Software and
 
 ## Preview:
 
-`Insert screenshots here`
+![2019-06-12 16 38 34](https://user-images.githubusercontent.com/20582868/59391160-b79d5980-8d30-11e9-9325-298460f5cb98.gif)
 
 ## Getting Started:
 
@@ -49,8 +51,7 @@ Some functionality that we'd like to have in future iterations:
 Palette Picker was built using: 
 - [SCSS](https://sass-lang.com/)
 - [React.js](https://reactjs.org/)
-- 
-- 
+
 
 And tested using:
 - [Enzyme](https://airbnb.io/enzyme/) & [Jest](https://airbnb.io/enzyme/docs/guides/jest.html)
